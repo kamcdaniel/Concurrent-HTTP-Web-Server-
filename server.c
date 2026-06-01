@@ -55,8 +55,8 @@ void handle_request(int nfd)
 	// isolate file name from stdin, check to make sure valid 
 	FILE *fp = fopen(file, "r");
 	if (fp == NULL) {
-		buffer = "Could not open file\n";
-		write(nfd, buffer, strlen(buffer));
+		char *error = "Could not open file\n";
+		write(nfd, error, strlen(error));
 	} else {
 		// if valid, fork to create child process to handle reading file contents
 		pid_t pid = fork();
@@ -75,10 +75,11 @@ void handle_request(int nfd)
 			// next fork should only apply to parent
 			exit(0);
 		}
+ 		free(buffer);
+        	fclose(fp);
 		// no need for "else", since signal handler function waits appropriately for children to end 
 	}
-	free(buffer);
-	fclose(fp);
+	
    }
    free(line);
    fclose(network);
