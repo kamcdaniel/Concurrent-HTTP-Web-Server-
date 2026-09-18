@@ -2,7 +2,7 @@
 
 ## Overview
 
-This assignment implements a simple HTTP web server in C based on an echo server. The server supports multiple simultaneous clients by using `fork()` to create a child process for each client request.
+A simple HTTP web server in C based on an echo server. The server supports multiple simultaneous clients by using `fork()` to create a child process for each client request.
 
 ## Features
 
